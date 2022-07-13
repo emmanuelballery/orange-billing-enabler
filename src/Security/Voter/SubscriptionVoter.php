@@ -5,6 +5,7 @@ namespace App\Security\Voter;
 use App\Entity\Subscription;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use function in_array;
 
 /**
  * @author "Emmanuel BALLERY" <emmanuel.ballery@gmail.com>

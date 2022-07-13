@@ -16,9 +16,9 @@ class CostValidator extends ConstraintValidator
     {
         if (null !== $value) {
             if (!is_float($value)) {
-                $this->context->addViolation("Cost must be a float.");
+                $this->context->addViolation('Cost must be a float.');
             } elseif ($value !== round($value, 2)) {
-                $this->context->addViolation("Cost must have a precision of 2.");
+                $this->context->addViolation('Cost must have a precision of 2.');
             }
         }
     }
