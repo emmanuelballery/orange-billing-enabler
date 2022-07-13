@@ -1,0 +1,30 @@
+api_platform:
+    title: ORANGE BILLING ENABLER (v0)
+    version: '0.0.0.beta'
+    show_webby: false
+    enable_re_doc: false
+    enable_profiler: false
+    defaults:
+        pagination_enabled: true
+        pagination_client_items_per_page: !php/const App\Paginator\Enum\PaginatorEnum::DEFAULT_LIMIT
+        pagination_maximum_items_per_page: !php/const App\Paginator\Enum\PaginatorEnum::MAX_LIMIT
+    collection:
+        order_parameter_name: !php/const App\Paginator\Enum\PaginatorEnum::ORDER_PARAMETER
+        pagination:
+            page_parameter_name: !php/const App\Paginator\Enum\PaginatorEnum::PAGE_PARAMETER
+            items_per_page_parameter_name: !php/const App\Paginator\Enum\PaginatorEnum::LIMIT_PARAMETER
+            client_items_per_page: true
+    mapping:
+        paths:
+            - '%kernel.project_dir%/src/Entity'
+    patch_formats:
+        json: ['application/merge-patch+json']
+    swagger:
+        versions: [ 3 ]
+    formats:
+        json:
+            mime_types: [ 'application/json' ]
+        jsonld:
+            mime_types: [ 'application/ld+json' ]
+        html:
+            mime_types: [ 'text/html' ]

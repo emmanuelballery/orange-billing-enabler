@@ -1,0 +1,19 @@
+webpack_encore:
+    output_path: '%kernel.project_dir%/public/build'
+    script_attributes:
+        defer: true
+    crossorigin: false
+    preload: true
+    strict_mode: true
+
+when@prod:
+    webpack_encore:
+        cache: true
+
+when@test:
+    webpack_encore:
+        strict_mode: false
+
+framework:
+    assets:
+        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'

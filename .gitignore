@@ -1,1 +1,13 @@
+/doc/
+/node_modules/
+/public/build/
+/public/bundles/
+/tools/*/vendor/
+/tools/*/node_modules/
+/var/
+/vendor/
+/.env.local
+/.env.local.php
+/.env.*.local
 /.idea/
+npm-debug.log

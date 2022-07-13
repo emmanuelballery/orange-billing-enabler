@@ -1,0 +1,6 @@
+doctrine_migrations:
+    migrations_paths:
+        DoctrineMigrations: '%kernel.project_dir%/migrations'
+    enable_profiler: '%kernel.debug%'
+    custom_template: '%kernel.project_dir%/migrations/template.php.txt'
+    check_database_platform: false

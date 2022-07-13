@@ -1,0 +1,43 @@
+{
+    "name": "aviso-oceane-bridge",
+    "version": "1.0.0",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/emmanuelballery/orange-billing-enabler.git"
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.11.5",
+        "boosted": "^5.1.3",
+        "font-awesome": "^4.7.0",
+        "vue": "^3.2.37",
+        "vue-router": "^4.1.2"
+    },
+    "devDependencies": {
+        "@babel/preset-env": "^7.18.6",
+        "@symfony/webpack-encore": "^3.0.0",
+        "autoprefixer": "^10.4.7",
+        "core-js": "^3.23.4",
+        "html-loader": "^4.1.0",
+        "postcss-loader": "^7.0.1",
+        "pug": "^3.0.2",
+        "regenerator-runtime": "^0.13.9",
+        "sass": "^1.53.0",
+        "sass-loader": "^13.0.2",
+        "vue-loader": "^17.0.0",
+        "vue-template-compiler": "^2.7.5",
+        "webpack-dev-server": "4.9.3",
+        "webpack-notifier": "^1.15.0"
+    },
+    "scripts": {
+        "build": "encore production --no-stats --no-color",
+        "dev": "encore dev-server"
+    },
+    "browserslist": [
+        "> 0.5%",
+        "last 2 versions",
+        "Firefox ESR",
+        "not dead",
+        "IE 11"
+    ]
+}

@@ -1,0 +1,55 @@
+mixin fa(icon)
+    span.fa.fa-fw(class='fa-' + icon)
+
+mixin table()
+    .table-container
+        table.table.table-sm.table-hover
+            block
+
+mixin input(model)
+    input.form-control(v-model=model)&attributes(attributes)
+
+mixin input_number(model)
+    input.form-control(v-model.number=model, type='number', step=1)&attributes(attributes)
+
+mixin validation_feedback(key, property)
+    template(v-if=key)
+        .invalid-feedback(v-for='message in ' + key + '.getMessages("' + property + '")') {{message}}
+
+mixin label(target, label)
+    label.form-label(for=target)&attributes(attributes)= label
+
+mixin label_required(target, label)
+    +label(target, label).is-required
+
+mixin paginator(key)
+    .d-flex
+        .alert.alert-info.me-1.p-2(v-if=key + '.isLoading')
+            p.mb-0
+                +fa('spinner fa-spin')
+                = ' Loading…'
+        .alert.alert-warning.me-1.p-2(v-if='!' + key + '.isLoading && 0 == ' + key + '.count')
+            p.mb-0
+                +fa('meh-o')
+                = ' No result found.'
+        .btn-group.mb-3
+            button.btn.btn-secondary.p-2(type='button', :disabled='!' + key + '.hasPrevious', @click=key + '.previous()', title='Previous')
+                +fa('caret-left')
+                .sr-only= ' Previous'
+            .btn-group.dropdown(v-dropdown)
+                button.btn.btn-secondary.dropdown-toggle.p-2(type='button', data-bs-toggle='dropdown')
+                    = '{{' + key + '.itemFrom}}-{{' + key + '.itemTo}} on {{' + key + '.count}}'
+                ul.dropdown-menu
+                    li(v-for='l in ' + key + '.limits')
+                        button.dropdown-item(type='button', :disabled=key + '.limit == l', @click=key + '.setLimit(l)')
+                            = '{{l}} per page'
+            button.btn.btn-secondary.p-2(type='button', :disabled='!' + key + '.hasNext', @click=key + '.next()', title='Next')
+                +fa('caret-right')
+                .sr-only= ' Next'
+
+mixin ticket_status(key)
+    span.badge.bg-warning(v-if='"processing" === ' + key)= '{{' + key + '}}'
+    span.badge.bg-danger(v-else-if='"stalled" === ' + key)= '{{' + key + '}}'
+    span.badge.bg-success(v-else-if='"synced" === ' + key)= '{{' + key + '}}'
+    span.badge.bg-light(v-else-if='"canceled" === ' + key)= '{{' + key + '}}'
+    span.badge.bg-secondary(v-else)= '{{' + key + '}}'

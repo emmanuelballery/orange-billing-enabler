@@ -1,0 +1,10 @@
+framework:
+    messenger:
+        reset_on_message: true
+        buses:
+            command_bus:
+                middleware:
+                    - doctrine_ping_connection
+                    - doctrine_close_connection
+        transports:
+            async: '%env(MESSENGER_TRANSPORT_DSN)%'

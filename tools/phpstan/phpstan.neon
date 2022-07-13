@@ -1,0 +1,14 @@
+parameters:
+    level: 7
+    paths:
+        - ../../src
+    checkMissingIterableValueType: false
+    doctrine:
+        objectManagerLoader: object-manager-loader.php
+    symfony:
+        container_xml_path: ../../var/cache/dev/App_KernelDevDebugContainer.xml
+    ignoreErrors:
+        - '#but database expects#'
+        - '#should be contravariant with parameter#'
+    parallel:
+        maximumNumberOfProcesses: 4
