@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "strict": false,
+        "strictNullChecks": false,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "useDefineForClassFields": false,
+        "noImplicitReturns": true,
+        "baseUrl": "assets/",
+        "paths": {
+            "@/*": [
+                "*"
+            ]
+        }
+    },
+    "include": [
+        "assets/**/*.ts",
+        "assets/**/*.vue"
+    ]
+}

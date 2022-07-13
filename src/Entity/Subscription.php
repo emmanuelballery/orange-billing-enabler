@@ -17,6 +17,7 @@ use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use function count;
@@ -37,7 +38,7 @@ use function count;
         'put' => ['security' => 'is_granted("' . SubscriptionVoter::UPDATE . '", object)'],
         'delete' => ['security' => 'is_granted("' . SubscriptionVoter::DELETE . '", object)'],
     ],
-    denormalizationContext: ['groups' => [self::GROUP_WRITE], 'swagger_definition_name' => 'Write'],
+    denormalizationContext: ['groups' => [self::GROUP_WRITE], 'disable_type_enforcement' => true, 'swagger_definition_name' => 'Write'],
     normalizationContext: ['groups' => [self::GROUP_READ], 'swagger_definition_name' => 'Read'],
     order: ['created' => 'DESC']
 )]
@@ -54,48 +55,52 @@ class Subscription
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
     #[Groups([self::GROUP_READ])]
-    public ?int $id;
+    public ?Uuid $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Groups([self::GROUP_READ])]
     public ?DateTime $created = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     #[Groups([self::GROUP_READ])]
     public ?DateTime $updated = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
     #[Assert\Length(max: 255)]
     #[Groups([self::GROUP_READ, self::GROUP_WRITE])]
     public ?string $subscriptionId = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'subscription_key')]
+    #[Assert\NotNull]
     #[Assert\Length(max: 255)]
     #[Groups([self::GROUP_READ, self::GROUP_WRITE])]
     public ?string $key = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'subscription_value')]
+    #[Assert\NotNull]
     #[Assert\Length(max: 255)]
     #[Groups([self::GROUP_READ, self::GROUP_WRITE])]
     public ?string $value = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(name: 'subscription_cost', nullable: true)]
     #[Assert\GreaterThan(.0)]
     #[Cost]
     #[ApiProperty(description: 'Either fill the cost or add rows.')]
     #[Groups([self::GROUP_READ, self::GROUP_WRITE])]
     public ?float $cost = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    #[ORM\Column(name: 'subscription_start', type: Types::DATE_MUTABLE)]
+    #[Assert\NotNull]
     #[Groups([self::GROUP_READ, self::GROUP_WRITE])]
     public ?DateTime $start = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    #[ORM\Column(name: 'subscription_end', type: Types::DATE_MUTABLE, nullable: true)]
     #[Assert\GreaterThan(propertyPath: 'start')]
     #[Groups([self::GROUP_READ, self::GROUP_WRITE])]
     public ?DateTime $end = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'subscription_periodicity')]
     #[Assert\NotNull]
     #[Assert\Choice(choices: PeriodicityEnum::ALL)]
     #[ApiProperty(openapiContext: ['enum' => PeriodicityEnum::ALL])]
@@ -103,7 +108,7 @@ class Subscription
     public ?string $periodicity = null;
 
     /** @var array<SubscriptionRow> */
-    #[ORM\Column(type: 'json_document')]
+    #[ORM\Column(name: 'subscription_rows', type: 'json_document')]
     #[Assert\Valid]
     #[Groups([self::GROUP_READ, self::GROUP_WRITE])]
     public array $rows = [];

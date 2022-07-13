@@ -9,13 +9,14 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 Encore
     .setOutputPath('public/build/')
     .setPublicPath('/build')
-    .addEntry('app', './assets/app.js')
+    .addEntry('app', './assets/app.ts')
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
     .enableIntegrityHashes(Encore.isProduction())
+    .enableTypeScriptLoader()
     .configureBabel(config => {
         config.plugins.push('@babel/plugin-proposal-class-properties');
     })

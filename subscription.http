@@ -1,0 +1,72 @@
+### List subscriptions
+GET {{host}}/api/subscriptions
+Accept: application/json
+Authorization: Basic {{username}} {{password}}
+
+### Create subscription
+POST {{host}}/api/subscriptions
+Content-Type: application/json
+Accept: application/json
+Authorization: Basic {{username}} {{password}}
+
+{
+    "subscriptionId": "l440ptyh-S3OBJECTSTORAGE02-1213546",
+    "key": "TEST-LVL1-KEY",
+    "value": "TEST-LVL1-VALUE",
+    "cost": null,
+    "start": "2022-01-01T00:00:00.000Z",
+    "end": null,
+    "periodicity": "daily",
+    "rows": [
+        {
+            "key": "TEST-LVL1.1-KEY",
+            "value": "TEST-LVL1.1-VALUE",
+            "cost": null,
+            "rows": [
+                {
+                    "key": "TEST-LVL1.1.1-KEY",
+                    "value": "TEST-LVL1.1.1-VALUE",
+                    "unit": "TEST-LVL1.1.1-UNIT",
+                    "cost": 50.0
+                },
+                {
+                    "key": "TEST-LVL1.1.2-KEY",
+                    "value": "TEST-LVL1.1.2-VALUE",
+                    "unit": "TEST-LVL1.1.2-UNIT",
+                    "cost": 100.0
+                },
+                {
+                    "key": "TEST-LVL1.1.3-KEY",
+                    "value": "TEST-LVL1.1.3-VALUE",
+                    "unit": "TEST-LVL1.1.3-UNIT",
+                    "cost": 150.0
+                }
+            ]
+        },
+        {
+            "key": "TEST-LVL1.2.1-KEY",
+            "value": "TEST-LVL1.2.1-VALUE",
+            "cost": null,
+            "rows": [
+                {
+                    "key": "TEST-LVL1.2.1-KEY",
+                    "value": "TEST-LVL1.2.1-VALUE",
+                    "unit": "TEST-LVL1.2.1-UNIT",
+                    "cost": 45646.43
+                },
+                {
+                    "key": "TEST-LVL1.2.2-KEY",
+                    "value": "TEST-LVL1.2.2-VALUE",
+                    "unit": "TEST-LVL1.2.2-UNIT",
+                    "cost": 755.45
+                },
+                {
+                    "key": "TEST-LVL1.2.3-KEY",
+                    "value": "TEST-LVL1.2.3-VALUE",
+                    "unit": "TEST-LVL1.2.3-UNIT",
+                    "cost": 500.65
+                }
+            ]
+        }
+    ]
+}

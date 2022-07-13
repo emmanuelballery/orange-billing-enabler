@@ -1,8 +1,0 @@
-### List subscriptions
-GET {{host}}/api/subscriptions
-Accept: application/json
-
-### Create subscriptions
-POST {{host}}/api/subscriptions
-Content-Type: application/json+ld
-Accept: application/json

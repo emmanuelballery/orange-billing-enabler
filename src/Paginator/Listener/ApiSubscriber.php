@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use function iterator_count;
 
 /**
  * @author "Emmanuel BALLERY" <emmanuel.ballery@gmail.com>
@@ -41,10 +42,14 @@ class ApiSubscriber implements EventSubscriberInterface
             Response::HTTP_OK === $event->getResponse()->getStatusCode() &&
             'json' === $event->getRequest()->getRequestFormat()
         ) {
+            $count = iterator_count($this->paginator->getIterator());
+
             $headers = $event->getResponse()->headers;
             $headers->set('X-Paginator-Page', (string)$this->paginator->getCurrentPage());
             $headers->set('X-Paginator-Limit', (string)$this->paginator->getItemsPerPage());
             $headers->set('X-Paginator-Count', (string)$this->paginator->getTotalItems());
+            $headers->set('X-Result-Count', (string)$count);
+            $headers->set('X-Total-Count', (string)$this->paginator->getTotalItems());
             $this->paginator = null;
         }
     }
