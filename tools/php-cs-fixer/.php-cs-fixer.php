@@ -75,4 +75,5 @@ return (new Config())
         'function_declaration' => false, // ['closure_function_spacing' => 'one'],
         'comment_to_phpdoc' => false,
         'increment_style' => false,
+        'blank_line_between_import_groups' => false,
     ]);
